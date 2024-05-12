@@ -1,0 +1,13 @@
+src: https://chat.openai.com/g/g-NzvRJJPK8-kittu-swamy/c/5c85a759-859c-4993-9c28-e8bdfe9aa5b6 
+
+notes:
+1. two methods: hosting server on the device itself or on the laptop
+
+
+Progress:
+
+1. github created
+2. front end created of the display (with fix variable)
+3. decided to first try the separate hosting device
+	a. could use API to read and display from the serialised data.
+	b. could be useful for other devices to connect
