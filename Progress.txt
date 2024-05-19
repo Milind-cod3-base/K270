@@ -22,7 +22,7 @@ Upcoming Tasks:
 1. add graph for standard deviation (done)
 2. create alert system with default values and a mp3.
 3. esp32 programmign for tcp connection and frequency and JSON 
-4. GUI not showing anything, no stats, nothing, recheck.
+4. GUI not showing anything, no stats, nothing, recheck.git
 
 (#include <ESP8266WiFi.h>
 #include <WiFiClient.h>
