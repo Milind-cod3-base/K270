@@ -1,0 +1,86 @@
+src: https://chatgpt.com/g/g-NzvRJJPK8-k270/c/013b44b3-c285-4cf6-bf32-ebade1d35915 
+
+notes:
+1. two methods: hosting server on the device itself or on the laptop
+
+
+Progress so far:
+
+1. github created
+2. front end created of the display (with fix variable)
+3. decided to first try the separate hosting device
+	a. could use API to read and display from the serialised data.
+	b. could be useful for other devices to connect
+4. Set up the Flask server.
+5. Configured the PostgreSQL database.
+6. Created the necessary database tables and set up migrations.
+7. Implemented the API endpoints to receive data from the ESP8266 and store it in the database.
+8. 
+
+Upcoming Tasks:
+
+1. add graph for standard deviation (done)
+2. create alert system with default values and a mp3.
+3. esp32 programmign for tcp connection and frequency and JSON 
+4. GUI not showing anything, no stats, nothing, recheck.
+
+(#include <ESP8266WiFi.h>
+#include <WiFiClient.h>
+
+const char* ssid = "your_SSID";
+const char* password = "your_PASSWORD";
+const char* server_ip = "your_server_ip"; // Replace with your server's IP address
+const int server_port = 5000;
+
+WiFiClient client;
+
+void setup() {
+  Serial.begin(115200);
+  delay(10);
+  
+  // Connect to WiFi
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("WiFi connected");
+}
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+
+  // Collect sensor data (example data here)
+  float bodyTemperature = 36.6;
+  float bloodOxygen = 98;
+  int heartBeats = 72;
+  float roomHumidity = 45;
+  float roomTemperature = 22;
+  bool suddenMovements = false;
+
+  // Create JSON payload
+  String payload = "{\"body_temperature\": " + String(bodyTemperature) +
+                   ", \"blood_oxygen\": " + String(bloodOxygen) +
+                   ", \"heart_beats\": " + String(heartBeats) +
+                   ", \"room_humidity\": " + String(roomHumidity) +
+                   ", \"room_temperature\": " + String(roomTemperature) +
+                   ", \"sudden_movements\": " + String(suddenMovements) + "}";
+
+  // Send data to the server
+  client.print("POST /api/sensor_data HTTP/1.1\r\n");
+  client.print("Host: " + String(server_ip) + ":" + String(server_port) + "\r\n");
+  client.print("Content-Type: application/json\r\n");
+  client.print("Content-Length: " + String(payload.length()) + "\r\n");
+  client.print("\r\n");
+  client.print(payload);
+  delay(5000);
+}
+
+void reconnect() {
+  while (!client.connect(server_ip, server_port)) {
+    delay(1000);
+  }
+}
+
