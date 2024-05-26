@@ -1,0 +1,22 @@
+HealthMonitorApp/
+├── app/
+│   ├── __init__.py          # Initializes Flask app
+│   ├── config.py            # Configuration settings for app
+│   ├── routes.py            # Flask routes that serve API endpoints
+│   ├── models.py            # Database models
+│   ├── static/              # Folder for static files
+│   │   ├── css/             # Folder for CSS files
+│   │   ├── js/              # Folder for JavaScript files
+│   │   ├── images/          # Folder for images and icons
+│   ├── templates/           # Folder for HTML templates
+│   │   ├── index.html       # Main HTML file for your app
+├── scripts/                 # Folder for scripts
+│   ├── setup_database.py    # Script to set up the database
+│   ├── start_server.sh      # Bash script to start server
+├── tests/                   # Folder for tests
+│   ├── test_api.py          # Tests for API endpoints
+│   ├── test_db.py           # Tests for database interactions
+├── venv/                    # Virtual environment for Python packages
+├── README.md                # Project overview and setup instructions
+├── .gitignore               # Specifies intentionally untracked files to ignore
+├── requirements.txt         # Fixed versions of all the Python packages required
