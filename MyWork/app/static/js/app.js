@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const socket = io.connect('http://127.0.0.1:5000');
+    const socket = io.connect('http://127.0.0.1:5000'); // Change this to your server's LAN IP address if needed
 
     const temperatureElem = document.getElementById('body-temperature');
     const oxygenElem = document.getElementById('blood-oxygen');
@@ -54,6 +54,37 @@ document.addEventListener('DOMContentLoaded', function () {
         chart.update();
     }
 
+    function fetchLatestData() {
+        fetch('/api/latest_sensor_data')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+                const timestamp = new Date(data.timestamp);
+
+                temperatureElem.textContent = data.body_temperature;
+                oxygenElem.textContent = data.blood_oxygen;
+                heartElem.textContent = data.heart_beats;
+                humidityElem.textContent = data.room_humidity;
+                roomTempElem.textContent = data.room_temperature;
+
+                updateChart(tempChart, timestamp, data.body_temperature);
+                updateChart(oxygenChart, timestamp, data.blood_oxygen);
+                updateChart(heartChart, timestamp, data.heart_beats);
+                updateChart(humidityChart, timestamp, data.room_humidity);
+                updateChart(roomTempChart, timestamp, data.room_temperature);
+
+                if (data.sudden_movements) {
+                    alertElem.classList.remove('hidden');
+                } else {
+                    alertElem.classList.add('hidden');
+                }
+            })
+            .catch(error => console.error('Error fetching latest data:', error));
+    }
+
     socket.on('new_data', function (data) {
         const timestamp = new Date(data.timestamp);
 
@@ -75,4 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
             alertElem.classList.add('hidden');
         }
     });
+
+    fetchLatestData(); // Fetch the latest data when the page loads
 });

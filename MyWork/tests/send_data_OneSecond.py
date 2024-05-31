@@ -11,7 +11,7 @@ for i in range(5):
     
     # Create dummy data with slight variations
     data = {
-        'timestamp': timestamp,
+        'timestamp': timestamp, 
         'body_temperature': round(36.5 + i * 0.1, 1),
         'blood_oxygen': 98 - i,
         'heart_beats': 72 + i,
