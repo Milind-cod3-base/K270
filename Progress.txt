@@ -11,7 +11,7 @@ notes:
 <<<<<<< HEAD
 Progress so far:
 =======
-Progress:
+Completed:
 
 1. github created
 2. front end created of the display (with fix variable)
@@ -24,15 +24,16 @@ Progress:
 6. Created the necessary database tables and set up migrations.
 7. Implemented the API endpoints to receive data from the ESP8266 and store it in the database.
 8. Tested backedn APIs to store the sensor data (works on both recurring and static data).
+9. UI  updated with apple app look and y scroll enabled along with icons  (showing live data)
 
 Upcoming Tasks:
 
-1. add graph for standard deviation 
+1. add graph for standard deviation / or add table if possible (last 10 rows)
 2. create alert system with default values and a mp3.
-3. esp32 programmign for tcp connection and frequency and JSON 
-4. GUI not showing anything, no stats, nothing, recheck index.html -> check routes.py, app.js, html and css (working now, can display live data)
-5. GUI not showing any charts. work on that.
+3. stm and esp32 programmign for tcp connection and frequency and JSON 
 
+
+----Appendix------ esp32 code but might not be needed
 (#include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 
