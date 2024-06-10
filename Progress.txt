@@ -25,10 +25,11 @@ Completed:
 7. Implemented the API endpoints to receive data from the ESP8266 and store it in the database.
 8. Tested backedn APIs to store the sensor data (works on both recurring and static data).
 9. UI  updated with apple app look and y scroll enabled along with icons  (showing live data)
+10. graph added and wokring on all devices
 
 Upcoming Tasks:
 
-1. add graph for standard deviation / or add table if possible (last 10 rows)
+
 2. create alert system with default values and a mp3.
 3. stm and esp32 programmign for tcp connection and frequency and JSON 
 
