@@ -61,11 +61,35 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function initializeCharts() {
-        Plotly.newPlot('body-temperature-chart', [], { title: 'Body Temperature' });
-        Plotly.newPlot('blood-oxygen-chart', [], { title: 'Blood Oxygen' });
-        Plotly.newPlot('heart-beats-chart', [], { title: 'Heart Beats' });
-        Plotly.newPlot('room-humidity-chart', [], { title: 'Room Humidity' });
-        Plotly.newPlot('room-temperature-chart', [], { title: 'Room Temperature' });
+        Plotly.newPlot('body-temperature-chart', [], {
+            title: 'Body Temperature (°C)',
+            yaxis: { title: 'Body Temperature (°C)' },
+            xaxis: { title: 'Timestamp' }
+        });
+
+        Plotly.newPlot('blood-oxygen-chart', [], {
+            title: 'Blood Oxygen (%)',
+            yaxis: { title: 'Blood Oxygen (%)' },
+            xaxis: { title: 'Timestamp' }
+        });
+
+        Plotly.newPlot('heart-beats-chart', [], {
+            title: 'Heart Beats (bpm)',
+            yaxis: { title: 'Heart Beats (bpm)' },
+            xaxis: { title: 'Timestamp' }
+        });
+
+        Plotly.newPlot('room-humidity-chart', [], {
+            title: 'Room Humidity (%)',
+            yaxis: { title: 'Room Humidity (%)' },
+            xaxis: { title: 'Timestamp' }
+        });
+
+        Plotly.newPlot('room-temperature-chart', [], {
+            title: 'Room Temperature (°C)',
+            yaxis: { title: 'Room Temperature (°C)' },
+            xaxis: { title: 'Timestamp' }
+        });
     }
 
     function updateCharts(data) {
@@ -82,7 +106,11 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'scatter',
             mode: 'lines',
             name: 'Body Temperature'
-        }]);
+        }], {
+            title: 'Body Temperature (°C)',
+            yaxis: { title: 'Body Temperature (°C)' },
+            xaxis: { title: 'Timestamp' }
+        });
 
         Plotly.react('blood-oxygen-chart', [{
             x: timestamps,
@@ -90,7 +118,11 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'scatter',
             mode: 'lines',
             name: 'Blood Oxygen'
-        }]);
+        }], {
+            title: 'Blood Oxygen (%)',
+            yaxis: { title: 'Blood Oxygen (%)' },
+            xaxis: { title: 'Timestamp' }
+        });
 
         Plotly.react('heart-beats-chart', [{
             x: timestamps,
@@ -98,7 +130,11 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'scatter',
             mode: 'lines',
             name: 'Heart Beats'
-        }]);
+        }], {
+            title: 'Heart Beats (bpm)',
+            yaxis: { title: 'Heart Beats (bpm)' },
+            xaxis: { title: 'Timestamp' }
+        });
 
         Plotly.react('room-humidity-chart', [{
             x: timestamps,
@@ -106,7 +142,11 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'scatter',
             mode: 'lines',
             name: 'Room Humidity'
-        }]);
+        }], {
+            title: 'Room Humidity (%)',
+            yaxis: { title: 'Room Humidity (%)' },
+            xaxis: { title: 'Timestamp' }
+        });
 
         Plotly.react('room-temperature-chart', [{
             x: timestamps,
@@ -114,7 +154,11 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'scatter',
             mode: 'lines',
             name: 'Room Temperature'
-        }]);
+        }], {
+            title: 'Room Temperature (°C)',
+            yaxis: { title: 'Room Temperature (°C)' },
+            xaxis: { title: 'Timestamp' }
+        });
     }
 
     // Fetch the latest sensor data on page load
