@@ -114,6 +114,25 @@ def get_latest_sensor_data():
         print("Error occurred:", str(e))
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+    
+@current_app.route('/api/sensor_data_last_10', methods=['GET'])
+def get_sensor_data_last_10():
+    try:
+        sensor_data = SensorData.query.order_by(SensorData.timestamp.desc()).limit(10).all()
+        data = [{
+            'timestamp': sd.timestamp.strftime('%Y-%m-%dT%H:%M:%S'),
+            'body_temperature': sd.body_temperature,
+            'blood_oxygen': sd.blood_oxygen,
+            'heart_beats': sd.heart_beats,
+            'room_humidity': sd.room_humidity,
+            'room_temperature': sd.room_temperature
+        } for sd in sensor_data]
+        print("Charts working")
+        return jsonify(data[::-1])  # Reverse to get ascending order
+    except Exception as e:
+        print("Charts not showing up")
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 @socketio.on('connect')
 def handle_connect():
