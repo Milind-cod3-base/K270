@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Monitoring System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -65,9 +65,28 @@
                     </div>
                 </div>
             </div>
+
+            <div class="history-data">
+                <h2>Historical Data</h2>
+                <div class="card">
+                    <div id="body-temperature-chart"></div>
+                </div>
+                <div class="card">
+                    <div id="blood-oxygen-chart"></div>
+                </div>
+                <div class="card">
+                    <div id="heart-beats-chart"></div>
+                </div>
+                <div class="card">
+                    <div id="room-humidity-chart"></div>
+                </div>
+                <div class="card">
+                    <div id="room-temperature-chart"></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="/static/js/app.js"></script>
 </body>
 </html>
