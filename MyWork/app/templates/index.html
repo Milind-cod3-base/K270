@@ -195,7 +195,7 @@
 </html> -->
 
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -222,5 +222,194 @@
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
-</html>
+</html> -->
 
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Health Monitoring System</h1>
+        <div id="emergency-alert" class="hidden">Emergency! Sudden movement detected!</div>
+
+        <div class="sensor-data">
+            <h2>Live Sensor Data</h2>
+            <div class="card">
+                <i class="fas fa-thermometer-half"></i>
+                <p>Body Temperature: <span id="body-temperature">Loading...</span> °C</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-lungs"></i>
+                <p>Blood Oxygen: <span id="blood-oxygen">Loading...</span> %</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-heartbeat"></i>
+                <p>Heart Beats: <span id="heart-beats">Loading...</span> bpm</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-tint"></i>
+                <p>Room Humidity: <span id="room-humidity">Loading...</span> %</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-thermometer-empty"></i>
+                <p>Room Temperature: <span id="room-temperature">Loading...</span> °C</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title-card">
+            <h1>Health Monitoring System</h1>
+        </div>
+        <div id="emergency-alert" class="hidden">Emergency! Sudden movement detected!</div>
+
+        <div class="sensor-data">
+            <h2>Live Sensor Data</h2>
+            <div class="card">
+                <i class="fas fa-thermometer-half"></i>
+                <p>Body Temperature: <span id="body-temperature">Loading...</span> °C</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-lungs"></i>
+                <p>Blood Oxygen: <span id="blood-oxygen">Loading...</span> %</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-heartbeat"></i>
+                <p>Heart Beats: <span id="heart-beats">Loading...</span> bpm</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-tint"></i>
+                <p>Room Humidity: <span id="room-humidity">Loading...</span> %</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-thermometer-empty"></i>
+                <p>Room Temperature: <span id="room-temperature">Loading...</span> °C</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title-card">
+            <h1>Health Monitoring System</h1>
+        </div>
+        <div class="content">
+            <div id="emergency-alert" class="hidden">Emergency! Sudden movement detected!</div>
+
+            <div class="sensor-data">
+                <h2>Live Sensor Data</h2>
+                <div class="card">
+                    <i class="fas fa-thermometer-half"></i>
+                    <p>Body Temperature: <span id="body-temperature">Loading...</span> °C</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-lungs"></i>
+                    <p>Blood Oxygen: <span id="blood-oxygen">Loading...</span> %</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-heartbeat"></i>
+                    <p>Heart Beats: <span id="heart-beats">Loading...</span> bpm</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-tint"></i>
+                    <p>Room Humidity: <span id="room-humidity">Loading...</span> %</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-thermometer-empty"></i>
+                    <p>Room Temperature: <span id="room-temperature">Loading...</span> °C</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title-card">
+            <h1>Health Monitoring System</h1>
+        </div>
+        <div class="content">
+            <div id="emergency-alert" class="hidden">Emergency! Sudden movement detected!</div>
+
+            <div class="sensor-data">
+                <h2>Live Sensor Data</h2>
+                <div class="card">
+                    <i class="fas fa-thermometer-half"></i>
+                    <p>Body Temperature: <span id="body-temperature">Loading...</span> °C</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-lungs"></i>
+                    <p>Blood Oxygen: <span id="blood-oxygen">Loading...</span> %</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-heartbeat"></i>
+                    <p>Heart Beats: <span id="heart-beats">Loading...</span> bpm</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-tint"></i>
+                    <p>Room Humidity: <span id="room-humidity">Loading...</span> %</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-thermometer-empty"></i>
+                    <p>Room Temperature: <span id="room-temperature">Loading...</span> °C</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
