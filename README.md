@@ -2,14 +2,22 @@
 
 ## Section 1: Installation (Only One Time Setup)
 
-1. Install the required packages:
-    ```bash
-    pip install -r requirements.txt
-    ```
+1. Enter the root folder
 
 2. Create a virtual environment:
     ```bash
     python -m venv venv
+    ``` 
+
+2. Activate the venv:
+	```bash
+    .\venv\Scripts\activate
+    ```
+
+
+3. Install the required packages:
+    ```bash
+    pip install -r requirements.txt
     ```
 
 ## Section 2: Running
