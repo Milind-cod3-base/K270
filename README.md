@@ -32,12 +32,16 @@
 
 3. Use the following script for hosting on a local machine:
     ```bash
+	set FLASK_APP=app
+    set FLASK_ENV=development
     flask run
     ```
 	This will show IP similar to: http://127.0.0.1:5000. Use this in the same device's browser of your choice.
 
 4. Use the following script for hosting on a LAN:
     ```bash
+	set FLASK_APP=app
+    set FLASK_ENV=development
     flask run --host=0.0.0.0
     ```
 	This will show IP similar to: http://192.168.178.67:5000. Use this in a LAN connected device's browser of your choice.
