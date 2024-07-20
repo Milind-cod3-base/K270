@@ -25,7 +25,7 @@
 1. Navigate to the `MyWork` folder:
    
 
-2. Initiate the virtual environment:
+2. Initiate the virtual environment (for Windows):
     ```bash
     .\venv\Scripts\activate
     ```
@@ -48,16 +48,16 @@
 	
 ## Section 3: Testing (While the server is running in one terminal, open another cmd)
 
-1. Navigate to MyWork\ folder
+1. Navigate to MyWork\ 
 
 2. Activate Virtual environment again this new terminal:
 	
 	```bash
     .\venv\Scripts\activate
     ```
-3. Navigate to MyWork\tests\ folder
+3. Navigate to MyWork\tests\ 
 
-4. Run python script, and monitor the browser on your screen:
+4. Run python script, and monitor the browser on your screen. Following script will send 10 dummy sensor data to populate the database, and hence updates the UI in real-time:
 	```bash
 	 python send_data_OneSecond.py
     ```
