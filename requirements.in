@@ -1,0 +1,6 @@
+# This is a requirements.in file which consists of main upperlevel libraries used in this project.
+
+flask
+flask_sqlalchemy
+flask_socketio
+flask_migrate
