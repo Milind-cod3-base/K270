@@ -17,4 +17,5 @@ HealthMonitorApp/
 ├── venv/                       # Virtual environment for Python packages
 ├── README.md                   # Project overview and setup instructions
 ├── .gitignore                  # Specifies intentionally untracked files to ignore
-├── requirements.txt            # Fixed versions of all the Python packages required
+├── requirements.in             # Contains main Python packages required
+├── requirements.txt            # Fixed versions of all the required Python packages with its dependencies
