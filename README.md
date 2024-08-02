@@ -66,5 +66,3 @@ Note: Only applicable for Windows OS
 	```bash
 	 python send_data_OneSecond.py
     ```
-	
-	

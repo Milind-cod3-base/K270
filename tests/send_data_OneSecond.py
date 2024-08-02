@@ -8,10 +8,10 @@ url = 'http://127.0.0.1:5000/api/sensor_data'
 for i in range(5):
     # Generate a timestamp
     timestamp = (datetime.now() + timedelta(seconds=i)).strftime('%Y-%m-%dT%H:%M:%S')
-    
+
     # Create dummy data with slight variations
     data = {
-        'timestamp': timestamp, 
+        'timestamp': timestamp,
         'body_temperature': round(36.5 + i * 0.1, 1),
         'blood_oxygen': 98 - i,
         'heart_beats': 72 + i,

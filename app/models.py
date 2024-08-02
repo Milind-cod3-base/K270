@@ -3,6 +3,7 @@
 from datetime import datetime
 from . import db
 
+
 class SensorData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)

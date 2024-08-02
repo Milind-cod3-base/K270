@@ -1,4 +1,4 @@
-# Initialize Flask Application 
+# Initialize Flask Application
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -8,6 +8,7 @@ from flask_migrate import Migrate
 db = SQLAlchemy()
 socketio = SocketIO()
 migrate = Migrate()
+
 
 def create_app():
     app = Flask(__name__)
@@ -22,6 +23,7 @@ def create_app():
         db.create_all()
 
     return app
+
 
 app = create_app()
 
