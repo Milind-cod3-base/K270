@@ -4,3 +4,4 @@ flask
 flask_sqlalchemy
 flask_socketio
 flask_migrate
+requests
