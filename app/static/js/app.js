@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     console.log('Document is ready');
     const socket = io();
     let popupQueue = [];
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if ('Notification' in window && Notification.permission === 'granted') {
             new Notification("Fall Detected!", {
                 body: message,
-                icon: '/static/img/alert-icon.png' // Add an icon if desired
+                icon: '/static/img/alert-icon.png'
             });
         }
 

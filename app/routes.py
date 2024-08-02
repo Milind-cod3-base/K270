@@ -4,13 +4,16 @@ from app.models import SensorData
 from flask_socketio import emit
 from app import db, socketio
 
+
 @current_app.route('/')
 def index():
     return render_template('index.html')
 
+
 @current_app.route('/static/<path:filename>')
 def static_files(filename):
     return send_from_directory(current_app.static_folder, filename)
+
 
 @current_app.route('/api/sensor_data', methods=['POST'])
 def create_sensor_data():
@@ -48,6 +51,7 @@ def create_sensor_data():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
+
 @current_app.route('/api/latest_sensor_data', methods=['GET'])
 def get_latest_sensor_data():
     print("API /api/latest_sensor_data called")
@@ -73,7 +77,8 @@ def get_latest_sensor_data():
         print("Error occurred:", str(e))
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
-    
+
+
 @current_app.route('/api/sensor_data_last_10', methods=['GET'])
 def get_sensor_data_last_10():
     try:
@@ -93,9 +98,11 @@ def get_sensor_data_last_10():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
+
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')
+
 
 @socketio.on('disconnect')
 def handle_disconnect():

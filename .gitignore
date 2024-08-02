@@ -1,3 +1,4 @@
-MyWork/venv/
-MyWork/__pycache__/
-MyWork/app/__pycache__/
+.venv
+__pycache__
+.vscode
+app.db
