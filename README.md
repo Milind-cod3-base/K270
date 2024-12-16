@@ -39,7 +39,7 @@ Note: Only applicable for Windows OS
     ```bash
 	set FLASK_APP=app
     set FLASK_ENV=development
-    flask run
+    flask run 
     ```
 	This will show IP similar to: http://127.0.0.1:5000. Use this in the same device's browser of your choice.
 

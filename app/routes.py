@@ -15,6 +15,11 @@ def static_files(filename):
     return send_from_directory(current_app.static_folder, filename)
 
 
+@current_app.route('/heartbeat', methods=['GET'])
+def heartbeat():
+    return jsonify({'status': 'OK'}), 200
+
+
 @current_app.route('/api/sensor_data', methods=['POST'])
 def create_sensor_data():
     data = request.get_json()
@@ -23,19 +28,31 @@ def create_sensor_data():
         return jsonify({'error': 'Invalid data'}), 400
 
     try:
+        # Extract and validate fields from the JSON payload
+        heart_rate = data.get('heart_rate')
+        blood_oxygen = data.get('blood_oxygen')
+        body_temp = data.get('body_temp')
+        room_temp = data.get('room_temp')
+        room_humidity = data.get('room_humidity')
+        # Set sudden movements to False since it's not provided
+        sudden_movements = False
+        # Ensure all required fields are present
+        if any(field is None for field in [heart_rate, blood_oxygen, body_temp, room_temp, room_humidity]):
+            return jsonify({'error': 'Missing fields in the data'}), 400
+        # Create a new SensorData record
         sensor_data = SensorData(
-            timestamp=datetime.strptime(data.get('timestamp'), '%Y-%m-%dT%H:%M:%S'),
-            body_temperature=data.get('body_temperature'),
-            blood_oxygen=data.get('blood_oxygen'),
-            heart_beats=data.get('heart_beats'),
-            room_humidity=data.get('room_humidity'),
-            room_temperature=data.get('room_temperature'),
-            sudden_movements=data.get('sudden_movements')
+            timestamp=datetime.utcnow(),
+            body_temperature=body_temp,
+            blood_oxygen=blood_oxygen,
+            heart_beats=heart_rate,
+            room_humidity=room_humidity,
+            room_temperature=room_temp,
+            sudden_movements=sudden_movements
         )
-
+        # Save the data to the database
         db.session.add(sensor_data)
         db.session.commit()
-
+        # Emit the data to connected clients via WebSocket
         socketio.emit('new_data', {
             'timestamp': sensor_data.timestamp.strftime('%Y-%m-%dT%H:%M:%S'),
             'body_temperature': sensor_data.body_temperature,
@@ -45,7 +62,6 @@ def create_sensor_data():
             'room_temperature': sensor_data.room_temperature,
             'sudden_movements': sensor_data.sudden_movements
         })
-
         return jsonify({'message': 'Data received successfully'}), 201
     except Exception as e:
         db.session.rollback()
