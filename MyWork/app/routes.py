@@ -27,11 +27,14 @@ def create_sensor_data():
             heart_beats=data.get('heart_beats'),
             room_humidity=data.get('room_humidity'),
             room_temperature=data.get('room_temperature'),
-            sudden_movements=data.get('sudden_movements')
+            sudden_movements=data.get('sudden_movements', False)
         )
 
         db.session.add(sensor_data)
-        db.session.commit()
+        db.session.commit()  # Ensure this is called after adding to session
+
+        # Log that data was added successfully
+        print(f"Data added to database: {sensor_data}")
 
         socketio.emit('new_data', {
             'timestamp': sensor_data.timestamp.strftime('%Y-%m-%dT%H:%M:%S'),
@@ -43,9 +46,10 @@ def create_sensor_data():
             'sudden_movements': sensor_data.sudden_movements
         })
 
-        return jsonify({'message': 'Data received successfully'}), 201
+        return jsonify({'message': 'Data received and stored successfully'}), 201
     except Exception as e:
-        db.session.rollback()
+        db.session.rollback()  # Rollback in case of error
+        print(f"Error storing sensor data: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
 @current_app.route('/api/latest_sensor_data', methods=['GET'])
@@ -90,6 +94,25 @@ def get_sensor_data_last_10():
         return jsonify(data[::-1])  # Reverse to get ascending order
     except Exception as e:
         print("Charts not showing up")
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@current_app.route('/api/all_sensor_data', methods=['GET'])
+def get_all_sensor_data():
+    try:
+        # Fetch all sensor data ordered by timestamp
+        all_sensor_data = SensorData.query.order_by(SensorData.timestamp.asc()).all()
+        data = [{
+            'timestamp': sd.timestamp.strftime('%Y-%m-%dT%H:%M:%S'),
+            'body_temperature': sd.body_temperature,
+            'blood_oxygen': sd.blood_oxygen,
+            'heart_beats': sd.heart_beats,
+            'room_humidity': sd.room_humidity,
+            'room_temperature': sd.room_temperature
+        } for sd in all_sensor_data]
+        return jsonify(data)
+    except Exception as e:
+        print("Error occurred:", str(e))
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 

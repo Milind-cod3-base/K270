@@ -19,6 +19,7 @@ def create_app():
 
     with app.app_context():
         from app import routes  # Import routes inside the app context
+        # Create tables only if they don't exist
         db.create_all()
 
     return app

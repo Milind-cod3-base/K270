@@ -1,6 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log('Document is ready');
     const socket = io();
+    let popupQueue = [];
+    let activePopup = null;
+
+    const emergencySound = document.getElementById('emergency-sound');
+
+    // Request notification permission
+    if ('Notification' in window) {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted.');
+            } else {
+                console.log('Notification permission denied.');
+            }
+        });
+    }
 
     socket.on('connect', () => {
         console.log('Connected to server');
@@ -14,6 +29,12 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log('New data received:', data);
         updateSensorData(data);
         fetchAndUpdateCharts();  // Fetch and update charts on new data
+
+        // Check for sudden movement
+        if (data.sudden_movements) {
+            const timestamp = new Date(data.timestamp).toLocaleString();
+            queuePopup(`Sudden movement detected at ${timestamp}`);
+        }
     });
 
     function fetchLatestSensorData() {
@@ -30,15 +51,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function fetchAndUpdateCharts() {
-        console.log('Fetching last 10 sensor data entries...');
-        fetch('/api/sensor_data_last_10')
+        console.log('Fetching all sensor data entries...');
+        fetch('/api/all_sensor_data')
             .then(response => response.json())
             .then(data => {
-                console.log('Last 10 sensor data received:', data);
+                console.log('All sensor data received:', data);
                 updateCharts(data);
             })
             .catch(error => {
-                console.error('Error fetching last 10 sensor data:', error);
+                console.error('Error fetching all sensor data:', error);
             });
     }
 
@@ -161,10 +182,56 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    function queuePopup(message) {
+        popupQueue.push(message);
+        showNextPopup();
+    }
+
+    function showNextPopup() {
+        if (activePopup || popupQueue.length === 0) {
+            return;
+        }
+        activePopup = popupQueue.shift();
+        createPopup(activePopup);
+    }
+
+    function createPopup(message) {
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.innerHTML = `
+            <div class="popup-content">
+                <span class="close-btn">×</span>
+                <p>${message}</p>
+            </div>
+        `;
+
+        document.body.appendChild(popup);
+
+        // Play emergency sound
+        emergencySound.play();
+
+        // Show notification
+        if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification("Fall Detected!", {
+                body: message,
+                icon: '/static/img/alert-icon.png' // Add an icon if desired
+            });
+        }
+
+        const closeButton = popup.querySelector('.close-btn');
+        closeButton.addEventListener('click', () => {
+            popup.remove();
+            emergencySound.pause();
+            emergencySound.currentTime = 0;
+            activePopup = null;
+            showNextPopup();
+        });
+    }
+
     // Fetch the latest sensor data on page load
     fetchLatestSensorData();
 
-    // Fetch the last 10 sensor data on page load
+    // Fetch and update charts on page load
     fetchAndUpdateCharts();
 
     // Initialize the charts
