@@ -51,15 +51,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function fetchAndUpdateCharts() {
-        console.log('Fetching last 10 sensor data entries...');
-        fetch('/api/sensor_data_last_10')
+        console.log('Fetching all sensor data entries...');
+        fetch('/api/all_sensor_data')
             .then(response => response.json())
             .then(data => {
-                console.log('Last 10 sensor data received:', data);
+                console.log('All sensor data received:', data);
                 updateCharts(data);
             })
             .catch(error => {
-                console.error('Error fetching last 10 sensor data:', error);
+                console.error('Error fetching all sensor data:', error);
             });
     }
 
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
         popup.classList.add('popup');
         popup.innerHTML = `
             <div class="popup-content">
-                <span class="close-btn">&times;</span>
+                <span class="close-btn">×</span>
                 <p>${message}</p>
             </div>
         `;
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if ('Notification' in window && Notification.permission === 'granted') {
             new Notification("Fall Detected!", {
                 body: message,
-                icon: '/static/img/alert-icon.png'
+                icon: '/static/img/alert-icon.png' // Add an icon if desired
             });
         }
 
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fetch the latest sensor data on page load
     fetchLatestSensorData();
 
-    // Fetch the last 10 sensor data on page load
+    // Fetch and update charts on page load
     fetchAndUpdateCharts();
 
     // Initialize the charts

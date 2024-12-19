@@ -12,7 +12,6 @@ class SensorData(db.Model):
     heart_beats = db.Column(db.Integer, nullable=False, index=True)
     room_humidity = db.Column(db.Float, nullable=False, index=True)
     room_temperature = db.Column(db.Float, nullable=False, index=True)
-    sudden_movements = db.Column(db.Boolean, nullable=False, index=True)
 
     def __repr__(self):
         return f'<SensorData {self.id}>'
