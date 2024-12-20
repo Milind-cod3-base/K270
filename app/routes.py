@@ -15,7 +15,12 @@ def static_files(filename):
     return send_from_directory(current_app.static_folder, filename)
 
 
-@current_app.route('/api/sensor_data', methods=['POST'])
+@current_app.route('/heartbeat', methods=['GET'])
+def heartbeat():
+    return jsonify({'message': 'Heartbeat Check'}), 200
+
+
+@current_app.route('/api/sensor_data', methods=['POST', 'GET'])
 def create_sensor_data():
     data = request.get_json()
     if not data:
