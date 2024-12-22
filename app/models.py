@@ -8,8 +8,8 @@ class SensorData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     body_temperature = db.Column(db.Float, nullable=False, index=True)
-    blood_oxygen = db.Column(db.Float, nullable=False, index=True)
-    heart_beats = db.Column(db.Integer, nullable=False, index=True)
+    blood_oxygen = db.Column(db.Float, nullable=True, index=True)
+    heart_beats = db.Column(db.Integer, nullable=True, index=True)
     room_humidity = db.Column(db.Float, nullable=False, index=True)
     room_temperature = db.Column(db.Float, nullable=False, index=True)
 

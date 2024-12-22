@@ -28,12 +28,16 @@ def create_sensor_data():
     try:
         # Use the current timestamp
         timestamp = datetime.now(timezone.utc)
+
+        blood_oxygen = data.get('blood_oxygen') if data.get('blood_oxygen') != -1 else None
+        heart_beats = data.get('heart_rate') if data.get('heart_rate') != -1 else None
+
         # Create a new SensorData instance with the parsed or default timestamp
         sensor_data = SensorData(
             timestamp=timestamp,
             body_temperature=data.get('body_temp'),
-            blood_oxygen=data.get('blood_oxygen'),
-            heart_beats=data.get('heart_rate'),
+            blood_oxygen=blood_oxygen,
+            heart_beats=heart_beats,
             room_humidity=data.get('room_humidity'),
             room_temperature=data.get('room_temp')
         )
