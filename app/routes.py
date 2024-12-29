@@ -39,7 +39,8 @@ def create_sensor_data():
             blood_oxygen=blood_oxygen,
             heart_beats=heart_beats,
             room_humidity=data.get('room_humidity'),
-            room_temperature=data.get('room_temp')
+            room_temperature=data.get('room_temp'),
+            step_count=data.get('step_count')
         )
         db.session.add(sensor_data)
         db.session.commit()
@@ -51,7 +52,8 @@ def create_sensor_data():
             'heart_beats': sensor_data.heart_beats,
             'room_humidity': sensor_data.room_humidity,
             'room_temperature': sensor_data.room_temperature,
-            'sos': data.get('sos')
+            'sos': data.get('sos'),
+            'step_count': sensor_data.step_count
         })
         return jsonify({'message': 'Data received and stored successfully'}), 201
     except ValueError as e:
@@ -73,7 +75,8 @@ def get_all_sensor_data():
             'blood_oxygen': sd.blood_oxygen,
             'heart_beats': sd.heart_beats,
             'room_humidity': sd.room_humidity,
-            'room_temperature': sd.room_temperature
+            'room_temperature': sd.room_temperature,
+            'step_count': sd.step_count
         } for sd in all_sensor_data]
         return jsonify(data)
     except Exception as e:

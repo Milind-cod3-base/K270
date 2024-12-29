@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const socket = io();
     let popupQueue = [];
     let activePopup = null;
+    let stepCountBuffer = []; // Buffer for step count data
+    let lastStepCountTimestamp = null; // To track the last update timestamp for step count
 
     const emergencySound = document.getElementById('emergency-sound');
 
@@ -79,6 +81,18 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Room Humidity updated to:', data.room_humidity);
         document.getElementById('room-temperature').textContent = data.room_temperature;
         console.log('Room Temperature updated to:', data.room_temperature);
+        document.getElementById('step-count').textContent = data.step_count;
+        console.log('Step Count updated to:', data.step_count);
+
+        const currentTimestamp = Math.floor(Date.now() / 1000); // Current timestamp in seconds
+        if (!lastStepCountTimestamp || currentTimestamp > lastStepCountTimestamp) {
+            stepCountBuffer.push({ timestamp: data.timestamp, step_count: data.step_count });
+            lastStepCountTimestamp = currentTimestamp;
+
+            // Update the UI with the latest step count
+            document.getElementById('step-count').textContent = data.step_count;
+            console.log('Step Count updated to:', data.step_count);
+        }
     }
 
     function initializeCharts() {
@@ -111,6 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
             yaxis: { title: 'Room Temperature (°C)' },
             xaxis: { title: 'Timestamp' }
         });
+
+        Plotly.newPlot('step-count-chart', [], {
+            title: 'Step Count',
+            yaxis: { title: 'Steps' },
+            xaxis: { title: 'Timestamp' },
+            type: 'bar'
+        });
     }
 
     function updateCharts(data) {
@@ -120,6 +141,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const heartBeats = data.map(entry => entry.heart_beats);
         const roomHumidities = data.map(entry => entry.room_humidity);
         const roomTemperatures = data.map(entry => entry.room_temperature);
+
+        const filteredStepCountData = stepCountBuffer.reduce((acc, current) => {
+            const last = acc[acc.length - 1];
+            if (!last || new Date(current.timestamp).getSeconds() !== new Date(last.timestamp).getSeconds()) {
+                acc.push(current);
+            }
+            return acc;
+        }, []);
+        const stepCountTimestamps = filteredStepCountData.map(entry => entry.timestamp);
+        const stepCounts = filteredStepCountData.map(entry => entry.step_count);
+
 
         Plotly.react('body-temperature-chart', [{
             x: timestamps,
@@ -178,6 +210,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }], {
             title: 'Room Temperature (°C)',
             yaxis: { title: 'Room Temperature (°C)' },
+            xaxis: { title: 'Timestamp' }
+        });
+
+        Plotly.react('step-count-chart', [{
+            x: stepCountTimestamps,
+            y: stepCounts,
+            type: 'bar',
+            name: 'Step Count'
+        }], {
+            title: 'Step Count',
+            yaxis: { title: 'Steps' },
             xaxis: { title: 'Timestamp' }
         });
     }
