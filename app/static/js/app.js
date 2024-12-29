@@ -31,9 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
         fetchAndUpdateCharts();  // Fetch and update charts on new data
 
         // Check for sudden movement
-        if (data.sudden_movements) {
+        if (data.sos) {
             const timestamp = new Date(data.timestamp).toLocaleString();
-            queuePopup(`Sudden movement detected at ${timestamp}`);
+            queuePopup(`Emergency SOS alert at ${timestamp}`);
         }
     });
 
@@ -212,9 +212,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Show notification
         if ('Notification' in window && Notification.permission === 'granted') {
-            new Notification("Fall Detected!", {
+            new Notification("SOS!", {
                 body: message,
-                icon: '/static/img/alert-icon.png' // Add an icon if desired
             });
         }
 

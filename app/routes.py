@@ -51,6 +51,7 @@ def create_sensor_data():
             'heart_beats': sensor_data.heart_beats,
             'room_humidity': sensor_data.room_humidity,
             'room_temperature': sensor_data.room_temperature,
+            'sos': data.get('sos')
         })
         return jsonify({'message': 'Data received and stored successfully'}), 201
     except ValueError as e:
